@@ -1,0 +1,394 @@
+# serializer version: 1
+# name: test_html_renderer_empty
+  '''
+  
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 20px;
+      color: #1a1a1a;
+  }
+  .container { max-width: 720px; margin: auto; }
+  .title { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #666; margin-bottom: 20px; }
+  .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+  .card-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #666;
+  }
+  .badge { font-weight: 600; }
+  .sender { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .priority { font-weight: 600; }
+  .card-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  .card-summary { color: #444; line-height: 1.5; font-size: 14px; }
+  .category-block + .category-block { margin-top: 16px; }
+  .category-header {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #555;
+      margin: 18px 0 6px;
+  }
+  .section-heading {
+      margin-top: 28px;
+      font-size: 16px;
+      font-weight: 650;
+  }
+  .section-subtitle {
+      margin-top: 4px;
+      margin-bottom: 12px;
+      color: #666;
+      font-size: 13px;
+  }
+  .cleanup-list {
+      margin-top: 4px;
+  }
+  .cleanup-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #f1f3f4;
+  }
+  .cleanup-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #777;
+      margin-bottom: 3px;
+  }
+  .cleanup-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px;
+  }
+  .cleanup-sender {
+      font-size: 12px;
+      color: #666;
+  }
+  .volume-list {
+      margin-top: 8px;
+  }
+  .volume-card {
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      background: #fff3e0;
+      border-left: 3px solid #ff9800;
+  }
+  .volume-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+  }
+  .volume-flag {
+      font-size: 16px;
+  }
+  .volume-sender {
+      flex: 1;
+      font-weight: 600;
+      font-size: 14px;
+  }
+  .volume-count {
+      font-size: 12px;
+      font-weight: 600;
+      color: #e65100;
+  }
+  .volume-breakdown {
+      font-size: 12px;
+      color: #666;
+  }
+  .recent-agg-list { margin-top: 8px; }
+  .recent-agg-card { border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; background: #e3f2fd; border-left: 3px solid #2196f3; }
+  .agg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .agg-emoji { font-size: 18px; }
+  .agg-sender { flex: 1; font-weight: 600; font-size: 14px; }
+  .agg-info { display: flex; justify-content: space-between; font-size: 12px; color: #555; margin-bottom: 8px; }
+  .agg-count { font-weight: 500; }
+  .agg-category { text-transform: capitalize; color: #666; }
+  .agg-actions { display: flex; gap: 8px; }
+  .action-btn { display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .delete-btn { background: #ffebee; color: #c62828; border: 1px solid #ef5350; }
+  .delete-btn:hover { background: #ef5350; color: white; }
+  .unsub-btn { background: #fff3e0; color: #e65100; border: 1px solid #ff9800; }
+  .unsub-btn:hover { background: #ff9800; color: white; }
+  .footer { margin-top: 24px; font-size: 13px; color: #888; }
+  </style>
+  </head>
+  <body>
+  <div class="container">
+      <div class="title">📬 Daily Email Digest</div>
+      <div class="subtitle">AI summary of today's emails</div>
+      <p style='color:#888'>No new emails to show today.</p>
+      
+      
+      
+      <div class="footer">Generated locally · 0 email(s) summarised</div>
+  </div>
+  </body>
+  </html>
+  
+  '''
+# ---
+# name: test_html_renderer_full
+  '''
+  
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 20px;
+      color: #1a1a1a;
+  }
+  .container { max-width: 720px; margin: auto; }
+  .title { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #666; margin-bottom: 20px; }
+  .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+  .card-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #666;
+  }
+  .badge { font-weight: 600; }
+  .sender { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .priority { font-weight: 600; }
+  .card-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  .card-summary { color: #444; line-height: 1.5; font-size: 14px; }
+  .category-block + .category-block { margin-top: 16px; }
+  .category-header {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #555;
+      margin: 18px 0 6px;
+  }
+  .section-heading {
+      margin-top: 28px;
+      font-size: 16px;
+      font-weight: 650;
+  }
+  .section-subtitle {
+      margin-top: 4px;
+      margin-bottom: 12px;
+      color: #666;
+      font-size: 13px;
+  }
+  .cleanup-list {
+      margin-top: 4px;
+  }
+  .cleanup-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #f1f3f4;
+  }
+  .cleanup-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #777;
+      margin-bottom: 3px;
+  }
+  .cleanup-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px;
+  }
+  .cleanup-sender {
+      font-size: 12px;
+      color: #666;
+  }
+  .volume-list {
+      margin-top: 8px;
+  }
+  .volume-card {
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      background: #fff3e0;
+      border-left: 3px solid #ff9800;
+  }
+  .volume-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+  }
+  .volume-flag {
+      font-size: 16px;
+  }
+  .volume-sender {
+      flex: 1;
+      font-weight: 600;
+      font-size: 14px;
+  }
+  .volume-count {
+      font-size: 12px;
+      font-weight: 600;
+      color: #e65100;
+  }
+  .volume-breakdown {
+      font-size: 12px;
+      color: #666;
+  }
+  .recent-agg-list { margin-top: 8px; }
+  .recent-agg-card { border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; background: #e3f2fd; border-left: 3px solid #2196f3; }
+  .agg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .agg-emoji { font-size: 18px; }
+  .agg-sender { flex: 1; font-weight: 600; font-size: 14px; }
+  .agg-info { display: flex; justify-content: space-between; font-size: 12px; color: #555; margin-bottom: 8px; }
+  .agg-count { font-weight: 500; }
+  .agg-category { text-transform: capitalize; color: #666; }
+  .agg-actions { display: flex; gap: 8px; }
+  .action-btn { display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .delete-btn { background: #ffebee; color: #c62828; border: 1px solid #ef5350; }
+  .delete-btn:hover { background: #ef5350; color: white; }
+  .unsub-btn { background: #fff3e0; color: #e65100; border: 1px solid #ff9800; }
+  .unsub-btn:hover { background: #ff9800; color: white; }
+  .footer { margin-top: 24px; font-size: 13px; color: #888; }
+  </style>
+  </head>
+  <body>
+  <div class="container">
+      <div class="title">📬 Daily Email Digest</div>
+      <div class="subtitle">AI summary of today's emails</div>
+      
+      <div class="category-block">
+          <div class="category-header">💼 Work</div>
+      
+          <a href="https://mail.google.com/mail/u/0/#inbox/2" class="card" style="border-left: 4px solid #1a73e8; background: #e8f0fe">
+              <div class="card-meta">
+                  <span class="sender">Boss</span>
+                  <span class="priority">P5</span>
+              </div>
+              <div class="card-title">Important Work</div>
+              <div class="card-summary">Work summary high priority</div>
+          </a>
+      </div>
+      <div class="category-block">
+          <div class="category-header">🏷️ Promo</div>
+      
+          <a href="https://mail.google.com/mail/u/0/#inbox/1" class="card" style="border-left: 4px solid #e37400; background: #fef3e2">
+              <div class="card-meta">
+                  <span class="sender">Promo Sender</span>
+                  <span class="priority">P1</span>
+              </div>
+              <div class="card-title">Promo Title</div>
+              <div class="card-summary">Promo summary</div>
+          </a>
+      </div>
+      
+      <div class="section-heading">📬 Recent Email Patterns</div>
+      <p class="section-subtitle">Senders who emailed you 3+ times in the past 3 days.</p>
+      <div class="recent-agg-list">
+          
+          <div class="recent-agg-card">
+              <div class="agg-header">
+                  <span class="agg-emoji">📰</span>
+                  <span class="agg-sender">newsletter@example.com</span>
+              </div>
+              <div class="agg-info">
+                  <span class="agg-count">3 emails in past 3 days</span>
+                  <span class="agg-category">newsletter</span>
+              </div>
+              <div class="agg-actions">
+                  <a href="https://mail.google.com/mail/u/0/#search/from:newsletter@example.com" class="action-btn delete-btn">Delete All</a> <a href="https://mail.google.com/mail/u/0/#inbox/2" class="action-btn unsub-btn">View to Unsubscribe</a>
+              </div>
+          </div>
+      
+      </div>
+      
+      
+      <div class="section-heading">📊 High Volume Senders (All Time)</div>
+      <p class="section-subtitle">Senders with 10+ emails total. Consider unsubscribing from newsletters.</p>
+      <div class="volume-list">
+          
+          <div class="volume-card">
+              <div class="volume-header">
+                  <span class="volume-flag">🚨</span>
+                  <span class="volume-sender">newsletter@example.com</span>
+                  <span class="volume-count">25 emails</span>
+              </div>
+              <div class="volume-breakdown">newsletter: 25</div>
+          </div>
+      
+          <div class="volume-card">
+              <div class="volume-header">
+                  <span class="volume-flag">⚠️</span>
+                  <span class="volume-sender">promo@shop.com</span>
+                  <span class="volume-count">15 emails</span>
+              </div>
+              <div class="volume-breakdown">promo: 15</div>
+          </div>
+      
+      </div>
+      
+      
+      <div class="section-heading">🧹 Tidy up older mail (30+ days)</div>
+      <p class="section-subtitle">Quick suggestions for messages that have been sitting for a while.</p>
+      <div class="cleanup-list">
+          
+          <a href="https://mail.google.com/mail/u/0/#inbox/10" class="cleanup-card">
+              <div class="cleanup-meta">
+                  <span class="cleanup-date">2025-01-01</span>
+                  <span class="cleanup-action">Delete</span>
+              </div>
+              <div class="cleanup-title">Old subject</div>
+              <div class="cleanup-sender">Old Newsletter</div>
+          </a>
+      
+      </div>
+      
+      <div class="footer">Generated locally · 2 email(s) summarised</div>
+  </div>
+  </body>
+  </html>
+  
+  '''
+# ---

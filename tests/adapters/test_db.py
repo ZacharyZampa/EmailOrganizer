@@ -6,15 +6,12 @@ from lib.adapters.storage import db
 def test_get_db_creates_directory_and_schema(tmp_path, monkeypatch):
     test_db_path = tmp_path / "state.db"
 
-    # Point the db module at our temporary location
     monkeypatch.setattr(db, "DB_PATH", str(test_db_path))
 
     conn = db.get_db()
     try:
-        # Database file should exist on disk
         assert Path(test_db_path).exists()
 
-        # emails table should have the expected columns, including account_email
         cur = conn.execute("PRAGMA table_info(emails)")
         cols = {row[1] for row in cur.fetchall()}
 
@@ -28,6 +25,14 @@ def test_get_db_creates_directory_and_schema(tmp_path, monkeypatch):
             "account_email",
         ]:
             assert expected in cols
+
+        conn.execute(
+            "INSERT INTO emails (gmail_id, sender, subject, category, priority, account_email) VALUES (?, ?, ?, ?, ?, ?)",
+            ("1", "a@b.com", "Subj", "work", 3, "user@test.com"),
+        )
+        conn.commit()
+
+        row = conn.execute("SELECT sender FROM emails WHERE gmail_id=?", ("1",)).fetchone()
+        assert row == ("a@b.com",)
     finally:
         conn.close()
-

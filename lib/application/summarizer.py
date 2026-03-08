@@ -12,11 +12,29 @@ from lib.config import MAX_BODY_CHARS
 
 VALID_CATEGORIES = {"work", "personal", "finance", "newsletter", "promo", "spam"}
 
-# Default LLM provider - can be swapped for other implementations
-_provider = LMStudioProvider()
+# Default LLM provider - lazily constructed on first use
+_provider = None
 
 # Registered summarizers - sorted by priority
 _summarizers: list[EmailSummarizer] = []
+
+
+def _ensure_initialized() -> None:
+    """Ensure the default provider and summarizers are initialized."""
+    global _provider
+    if _provider is None:
+        _provider = LMStudioProvider()
+
+    if not _summarizers:
+        _initialize_default_summarizers()
+
+
+def _reset() -> None:
+    """Reset module state (intended for tests)."""
+    global _provider
+    global _summarizers
+    _provider = None
+    _summarizers = []
 
 
 def set_llm_provider(provider):
@@ -51,12 +69,9 @@ def _initialize_default_summarizers():
     ]
 
 
-# Initialize with defaults
-_initialize_default_summarizers()
-
-
 def _chat(prompt: str, system_prompt: str | None = None) -> str:
     """Send a chat request to the configured LLM provider."""
+    _ensure_initialized()
     return _provider.chat(prompt, system_prompt)
 
 def categorize_email(text: str) -> dict:

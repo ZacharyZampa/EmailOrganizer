@@ -172,17 +172,19 @@ def _process_and_categorize_email(
     return subject, sender, snippet, category, priority
 
 
-def main(email_client: Optional[Any] = None) -> None:
+def main(email_client: Optional[Any] = None, db: Optional[Any] = None) -> None:
     """
     Main email processing pipeline.
     
     Args:
         email_client: Optional EmailClient implementation. Defaults to GmailClient.
+        db: Optional database connection. Defaults to get_db().
     """
     if email_client is None:
         email_client = GmailClient()
     
-    db = get_db()
+    if db is None:
+        db = get_db()
     account_email = email_client.get_account_email()
 
     msgs = email_client.get_recent_messages()
