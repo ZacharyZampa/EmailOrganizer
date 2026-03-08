@@ -218,20 +218,60 @@ All user-configurable settings are in `lib/config.py`:
 
 ### Testing
 
-Tests are organized by module:
+Tests use **fake adapters** (no external services) and **snapshot testing** for HTML output.
 
 ```
 tests/
-├── test_summarizer.py    # LLM categorization tests
-├── test_digest.py        # HTML generation tests
-├── test_run.py           # Helper function tests
-└── test_db.py            # Database tests
+├── conftest.py              # Shared fixtures, auto-reset of summarizer state
+├── fakes/
+│   ├── fake_email_client.py # In-memory EmailClient implementation
+│   └── fake_llm_provider.py # Deterministic LLMProvider implementation
+├── core/
+│   ├── test_categorize_email.py    # JSON parsing, normalization, fallbacks
+│   ├── test_summarize_plugins.py   # Plugin dispatch, priority ordering
+│   └── test_digest_data.py         # Dataclass construction
+├── pipeline/
+│   └── test_pipeline.py            # End-to-end through main() using fakes
+├── adapters/
+│   ├── test_builtin_summarizers.py # Newsletter/Standard/Fallback logic
+│   ├── test_html_renderer.py        # Snapshot tests for HTML output
+│   └── test_db.py                   # SQLite schema + round-trip
+├── test_email_parsing.py           # get_body, get_header, process_message_metadata
+└── test_db_queries.py              # save_email_to_db, get_high_volume_senders, etc.
 ```
 
-Run tests:
+#### Running tests
+
 ```bash
-pytest tests/ -v
+# Run all tests
+pytest
+
+# Verbose output
+pytest -v
+
+# Update HTML snapshots (when template changes)
+pytest --snapshot-update
 ```
+
+#### Pre-commit hooks
+
+Tests run automatically before each commit via pre-commit:
+
+```bash
+# Install once
+pip install pre-commit
+pre-commit install
+
+# Manual run
+pre-commit run --all-files
+```
+
+#### Adding tests
+
+- **Core logic**: Use `FakeLLMProvider` via `set_llm_provider()` in `tests/core/`
+- **Pipeline**: Use `FakeEmailClient` + in-memory DB in `tests/pipeline/`
+- **HTML changes**: Run `pytest --snapshot-update` to update snapshots
+- **New adapters**: Import fakes from `tests.fakes`
 
 ### Contributing
 
